@@ -506,7 +506,7 @@ span {
 }
 
 .outil {
-  background: var(--bg-color);
+  background: var(--second-bg-color);
 }
 
 .slider {
@@ -554,3 +554,44 @@ span {
 .slider span:hover img {
   transform: translateY(-50px) scale(1.2);
 }
+
+/*
+.contact{
+   min-height: auto;
+   padding-bottom: 7rem;
+}
+
+.contact form{
+   max-width: 70rem;
+   margin: 0 auto;
+   text-align: center;
+}
+
+.contact form .input-box{
+   position: relative;
+   display: flex;
+   justify-content: space-between;
+   flex-wrap: wrap;
+
+}
+
+.contact form .input-box .input-field{
+   position: relative;
+  width: 49%;
+  margin: 0.8rem 0;
+}
+
+/* Styles pour les champs de saisie dans le formulaire de contact */
+.contact form .input-box .input-field input,
+.contact form .textarea-field textarea {
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  font-size: 1.6rem;
+  color: var(--text-color);
+  background: transparent;
+  border-radius: .6rem;
+  border: 0.05rem solid var(--main-color);
+}
+ 
+ 
