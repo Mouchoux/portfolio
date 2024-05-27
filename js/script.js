@@ -44,3 +44,24 @@ window.onscroll = () => {
   navbar.classList.remove("active");
 };
   
+
+document.getElementById('download-cv').addEventListener('click', function(event) {
+  event.preventDefault();
+  downloadPDF();
+});
+
+async function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  const cvContent = document.getElementById('cv-content');
+  const cvHtml = cvContent.innerHTML;
+
+  await doc.html(cvHtml, {
+      callback: function (doc) {
+          doc.save('cv.pdf');
+      },
+      x: 10,
+      y: 10
+  });
+}

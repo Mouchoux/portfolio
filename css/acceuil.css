@@ -431,88 +431,73 @@ span {
   width: 90%;
 }
 
-.projet {
-  background: var(--bg-color);
-  padding-bottom: 5rem;
+.portfolio-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  gap: 2.5rem;
 }
-
-.bts {
+ 
+.portfolio-container .portfolio-box {
+  position: relative;
+  border-radius: 2rem;
+  box-shadow: 0 0 1rem var(--bg-color);
+  overflow: hidden;
   display: flex;
 }
-
-.projet h2 {
-  margin-bottom: 4rem;
-}
-
-.card {
-  width: 300px; /* Réduire la largeur du carré */
-  height: 300px; /* Réduire la hauteur du carré */
-  margin: 1rem;
-  border-radius: 8px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 2.4); /* Ajouter une ombre douce */
-}
-
-.card .image-box {
+ 
+.portfolio-box img {
   width: 100%;
-  height: 60%; /* Réduire la hauteur de la boîte image */
-  overflow: hidden;
+  transition: 0.5s ease;
 }
-
-.card .image-box img {
-  width: 100%; /* Remplit l'espace de la boîte image */
-  height: 100%; /* Remplit l'espace de la boîte image */
-  object-fit: contain; /* Ajuste l'image pour couvrir complètement */
-  transition: 0.55s ease-in-out;
+ 
+.portfolio-box:hover img {
+  transform: scale(1.1);
 }
-
-.card .content {
-  padding: 20px;
-}
-.card::after {
-  content: "";
+ 
+.portfolio-box .portfolio-layer {
   position: absolute;
-  inset: 0;
-  border: 2px solid white;
-  border-radius: inherit;
-  opacity: 0;
-  transition: 0.4s ease-in-out;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), var(--main-color));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 0 4rem;
+  transform: translateY(100%);
+  transition: 0.5s ease;
 }
-
-.card:hover img {
-  filter: grayscale(1) brightness(0.4);
+ 
+.portfolio-box:hover .portfolio-layer {
+  transform: translate(0);
 }
-
-.card:hover::after {
-  opacity: 1;
-  inset: 20px;
+ 
+.portfolio-layer h4 {
+  font-size: 1.5rem;
 }
-
-.card .content {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  color: white;
-  z-index: 1;
+ 
+.portfolio-layer p {
+  font-size: 0.8rem;
+  margin: 0.2rem 0 1rem;
 }
-
-.card .content h2 {
-  transform: scale(0);
-  opacity: 0;
-  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+ 
+.portfolio-layer a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  background: var(--text-color);
+  border-radius: 50%;
 }
-
-.card .content p {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-}
-
-.card:hover .content h2,
-.card:hover .content p {
-  opacity: 1;
-  transform: translateY(0);
+ 
+.portfolio-layer a i {
+  font-size: 1.2rem;
+  color: var(--second-bg-color);
 }
 
 /*
@@ -577,6 +562,81 @@ span {
 
 .slider span:hover img {
   transform: translateY(-50px) scale(1.2);
+}
+
+
+.veille {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: var(--bg-color);
+  padding: 10rem 9% 5rem;
+}
+
+.large-paragraph {
+  font-size: 18px;  /* Augmente la taille de la police */
+  line-height: 1.6;  /* Augmente l'espacement entre les lignes pour une meilleure lisibilité */
+  width: 80%;  /* Augmente la largeur du paragraphe */
+  padding: 20px;  /* Ajoute du rembourrage autour du texte */
+  margin: 20px auto;  /* Centre le paragraphe et ajoute de la marge */
+  background-color: var(--second-bg-color);  /* Ajoute une couleur de fond pour le faire ressortir */
+  border: 1px solid #00abf0;  /* Ajoute une bordure légère */
+  border-radius: 10px;  /* Adoucit les coins de la bordure */
+}
+
+.mhf{
+  font-size: 14px;  /* Augmente la taille de la police */
+ 
+}
+
+
+.veille h2 {
+  font-size: 18px;
+  text-decoration: underline;
+}
+/* Styles pour le titre de la section Veille */
+.veille .heading {
+  font-size: 25px;
+  margin-bottom: 5rem;
+  text-align: center;
+}
+ 
+/* Styles pour le contenu de la section Veille */
+.veille-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+}
+ 
+/* Styles pour les articles de veille */
+.article {
+  background: var(--second-bg-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+}
+ 
+/* Styles pour les titres des articles de veille */
+.article h3 {
+  font-size: 20px;
+  margin-bottom: 1rem;
+}
+ 
+/* Styles pour les liens "Lire la suite" des articles de veille */
+.article a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--main-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+ 
+/* Styles pour les liens "Lire la suite" survolés des articles de veille */
+.article a:hover {
+  color: rgb(83, 83, 200);
 }
 
 /* Styles pour la section de contact */
