@@ -726,11 +726,13 @@ input:valid ~ .focus,
 /* Styles pour la zone de texte dans le formulaire de contact */
 .contact form .textarea-field textarea {
   resize: none;
+ 
 }
 
 /* Styles pour le bouton de soumission dans le formulaire de contact */
 .contact form .btn-box .btn {
   cursor: pointer;
+  
 }
 
 /* Styles pour le pied de page */
