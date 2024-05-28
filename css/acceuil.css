@@ -16,10 +16,7 @@
   --second-bg-color: #112e42;
   --text-color: #ededed;
   --min-color: #00abf0;
-  
 }
-
-
 
 html {
   font-size: 62.5%;
@@ -437,7 +434,7 @@ span {
   align-items: center;
   gap: 2.5rem;
 }
- 
+
 .portfolio-container .portfolio-box {
   position: relative;
   border-radius: 2rem;
@@ -445,16 +442,16 @@ span {
   overflow: hidden;
   display: flex;
 }
- 
+
 .portfolio-box img {
   width: 100%;
   transition: 0.5s ease;
 }
- 
+
 .portfolio-box:hover img {
   transform: scale(1.1);
 }
- 
+
 .portfolio-box .portfolio-layer {
   position: absolute;
   bottom: 0;
@@ -471,20 +468,20 @@ span {
   transform: translateY(100%);
   transition: 0.5s ease;
 }
- 
+
 .portfolio-box:hover .portfolio-layer {
   transform: translate(0);
 }
- 
+
 .portfolio-layer h4 {
   font-size: 1.5rem;
 }
- 
+
 .portfolio-layer p {
   font-size: 0.8rem;
   margin: 0.2rem 0 1rem;
 }
- 
+
 .portfolio-layer a {
   display: inline-flex;
   justify-content: center;
@@ -494,7 +491,7 @@ span {
   background: var(--text-color);
   border-radius: 50%;
 }
- 
+
 .portfolio-layer a i {
   font-size: 1.2rem;
   color: var(--second-bg-color);
@@ -564,7 +561,6 @@ span {
   transform: translateY(-50px) scale(1.2);
 }
 
-
 .veille {
   display: flex;
   justify-content: center;
@@ -575,21 +571,21 @@ span {
 }
 
 .large-paragraph {
-  font-size: 18px;  /* Augmente la taille de la police */
-  line-height: 1.6;  /* Augmente l'espacement entre les lignes pour une meilleure lisibilité */
-  width: 80%;  /* Augmente la largeur du paragraphe */
-  padding: 20px;  /* Ajoute du rembourrage autour du texte */
-  margin: 20px auto;  /* Centre le paragraphe et ajoute de la marge */
-  background-color: var(--second-bg-color);  /* Ajoute une couleur de fond pour le faire ressortir */
-  border: 1px solid #00abf0;  /* Ajoute une bordure légère */
-  border-radius: 10px;  /* Adoucit les coins de la bordure */
+  font-size: 18px; /* Augmente la taille de la police */
+  line-height: 1.6; /* Augmente l'espacement entre les lignes pour une meilleure lisibilité */
+  width: 80%; /* Augmente la largeur du paragraphe */
+  padding: 20px; /* Ajoute du rembourrage autour du texte */
+  margin: 20px auto; /* Centre le paragraphe et ajoute de la marge */
+  background-color: var(
+    --second-bg-color
+  ); /* Ajoute une couleur de fond pour le faire ressortir */
+  border: 1px solid #00abf0; /* Ajoute une bordure légère */
+  border-radius: 10px; /* Adoucit les coins de la bordure */
 }
 
-.mhf{
-  font-size: 14px;  /* Augmente la taille de la police */
- 
+.mhf {
+  font-size: 14px; /* Augmente la taille de la police */
 }
-
 
 .veille h2 {
   font-size: 18px;
@@ -601,7 +597,7 @@ span {
   margin-bottom: 5rem;
   text-align: center;
 }
- 
+
 /* Styles pour le contenu de la section Veille */
 .veille-content {
   display: grid;
@@ -610,7 +606,7 @@ span {
   justify-content: center;
   align-items: center;
 }
- 
+
 /* Styles pour les articles de veille */
 .article {
   background: var(--second-bg-color);
@@ -618,13 +614,13 @@ span {
   border-radius: 1rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
 }
- 
+
 /* Styles pour les titres des articles de veille */
 .article h3 {
   font-size: 20px;
   margin-bottom: 1rem;
 }
- 
+
 /* Styles pour les liens "Lire la suite" des articles de veille */
 .article a {
   display: inline-block;
@@ -633,7 +629,7 @@ span {
   text-decoration: none;
   transition: color 0.3s;
 }
- 
+
 /* Styles pour les liens "Lire la suite" survolés des articles de veille */
 .article a:hover {
   color: rgb(83, 83, 200);
@@ -726,13 +722,11 @@ input:valid ~ .focus,
 /* Styles pour la zone de texte dans le formulaire de contact */
 .contact form .textarea-field textarea {
   resize: none;
- 
 }
 
 /* Styles pour le bouton de soumission dans le formulaire de contact */
 .contact form .btn-box .btn {
   cursor: pointer;
-  
 }
 
 /* Styles pour le pied de page */
@@ -815,7 +809,7 @@ footer {
 }
 
 /* Media queries pour les écrans jusqu'à 768px de largeur */
- @media (max-width: 768px) {
+@media (max-width: 768px) {
   .header {
     background: var(--bg-color);
   }
@@ -846,4 +840,12 @@ footer {
     font-size: 2rem;
     margin: 3rem 0;
   }
+}
+
+.paps {
+  font-size: 16px;
+}
+
+ul {
+  font-size: 16px;
 }
