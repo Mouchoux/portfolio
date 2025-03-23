@@ -385,7 +385,10 @@
               Notre site vitrine e-commerce de motos est conçu pour offrir aux
               passionnés de deux-roues une plateforme unique et conviviale
             </p>
-            <a href="https://www.canva.com/design/DAGGfxhe51I/LthRZ1R2lGIiBIH9wTNTFw/view?utm_content=DAGGfxhe51I&utm_campaign=designshare&utm_medium=link&utm_source=editor"><i class="bx bx-link-external"></i></a>
+            <a
+              href="https://www.canva.com/design/DAGGfxhe51I/LthRZ1R2lGIiBIH9wTNTFw/view?utm_content=DAGGfxhe51I&utm_campaign=designshare&utm_medium=link&utm_source=editor"
+              ><i class="bx bx-link-external"></i
+            ></a>
           </div>
         </div>
 
@@ -674,15 +677,25 @@
       <h2 class="heading">Contactez <span>Moi</span> !</h2>
 
       <!-- Formulaire de contact -->
-      <form action="#">
+      <form action="https://formspree.io/f/mzzerowk" method="POST">
         <!-- Champs de saisie pour le nom, l'e-mail, le numéro et l'objet -->
         <div class="input-box">
           <div class="input-field">
-            <input type="text" placeholder="Entrez votre nom..." required />
+            <input
+              type="text"
+              name="name"
+              placeholder="Entrez votre nom..."
+              required
+            />
             <span class="focus"></span>
           </div>
           <div class="input-field">
-            <input type="text" placeholder="Entrez votre e-mail..." required />
+            <input
+              type="email"
+              name="email"
+              placeholder="Entrez votre e-mail..."
+              required
+            />
             <span class="focus"></span>
           </div>
         </div>
@@ -691,13 +704,14 @@
           <div class="input-field">
             <input
               type="number"
+              name="phone"
               placeholder="Entrez votre numéro..."
               required
             />
             <span class="focus"></span>
           </div>
           <div class="input-field">
-            <input type="text" placeholder="Objet" required />
+            <input type="text" name="subject" placeholder="Objet" required />
             <span class="focus"></span>
           </div>
         </div>
@@ -705,18 +719,18 @@
         <!-- Zone de texte pour le message -->
         <div class="textarea-field">
           <textarea
-            name=""
-            id=""
+            name="message"
             cols="30"
             rows="10"
             placeholder="Message..."
+            required
           ></textarea>
           <span class="focus"></span>
         </div>
 
         <!-- Bouton de soumission du formulaire -->
         <div class="btn-box">
-          <button type="submit" class="btn">envoyer</button>
+          <button type="submit" class="btn">Envoyer</button>
         </div>
       </form>
     </section>
