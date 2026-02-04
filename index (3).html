@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prince - Portfolio SISR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0B1220;
+            --secondary-dark: #0F172A;
+            --accent-cyan: #22D3EE;
+            --accent-blue: #21DAFF;
+            --text-primary: #E6EEF5;
+            --text-secondary: #93A4B6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(11, 18, 32, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 20px var(--accent-cyan);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+            background: rgba(34, 211, 238, 0.1);
+        }
+
+        /* Particles Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            33% { transform: translateY(-20px) translateX(10px); }
+            66% { transform: translateY(10px) translateX(-10px); }
+        }
+
+        /* 3D Cube */
+        .cube-container {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            perspective: 1000px;
+        }
+
+        .cube {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 10s infinite linear;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid var(--accent-cyan);
+            background: rgba(34, 211, 238, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
+        }
+
+        .cube-face.front { transform: rotateY(0deg) translateZ(100px); }
+        .cube-face.back { transform: rotateY(180deg) translateZ(100px); }
+        .cube-face.right { transform: rotateY(90deg) translateZ(100px); }
+        .cube-face.left { transform: rotateY(-90deg) translateZ(100px); }
+        .cube-face.top { transform: rotateX(90deg) translateZ(100px); }
+        .cube-face.bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+        @keyframes rotateCube {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 6rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 30px var(--accent-cyan);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .profile-photo {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 50px rgba(34, 211, 238, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 50px rgba(34, 211, 238, 0.5); }
+            50% { box-shadow: 0 0 80px rgba(34, 211, 238, 0.8); }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+            color: var(--primary-dark);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-cyan);
+            border: 2px solid var(--accent-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-cyan);
+            color: var(--primary-dark);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.5);
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 30px rgba(34, 211, 238, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .skill-progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(34, 211, 238, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .skill-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            border-radius: 4px;
+            transition: width 2s ease;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-badge {
+            background: rgba(34, 211, 238, 0.2);
+            color: var(--accent-cyan);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 15px 40px rgba(34, 211, 238, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary-dark), var(--secondary-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Veille Section */
+        .veille-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .articles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .article-card {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .article-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 25px rgba(34, 211, 238, 0.2);
+        }
+
+        .article-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-title {
+            color: var(--accent-cyan);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .tools-sidebar {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        .tool-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(34, 211, 238, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-cyan);
+        }
+
+        /* Contact Form */
+        .contact-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(11, 18, 32, 0.8);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            color: var(--accent-cyan);
+            font-size: 2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--accent-blue);
+            text-shadow: 0 0 20px var(--accent-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+            border: none;
+            border-radius: 50%;
+            color: var(--primary-dark);
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.7);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(11, 18, 32, 0.95);
+                padding: 1rem 0;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .nav-menu.active {
+                transform: translateX(0);
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 4rem 1rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .cube-container {
+                position: static;
+                transform: none;
+                margin: 2rem 0;
+            }
+
+            .cube {
+                width: 150px;
+                height: 150px;
+            }
+
+            .cube-face {
+                width: 150px;
+                height: 150px;
+            }
+
+            .profile-photo {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto 2rem;
+            }
+
+            .veille-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Certifications Section */
+        .certifications-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            border-radius: 25px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+            color: var(--primary-dark);
+            border-color: transparent;
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            perspective: 1000px;
+        }
+
+        .cert-card-container {
+            height: 380px;
+            perspective: 1000px;
+        }
+
+        .cert-card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+            cursor: pointer;
+        }
+
+        .cert-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .cert-card-front,
+        .cert-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            padding: 2rem;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cert-card-front {
+            transform: rotateY(0deg);
+        }
+
+        .cert-card-back {
+            transform: rotateY(180deg);
+            background: rgba(11, 18, 32, 0.9);
+            border-color: var(--accent-cyan);
+        }
+
+        .cert-badge {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.5);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 30px rgba(34, 211, 238, 0.5); }
+            50% { box-shadow: 0 0 50px rgba(34, 211, 238, 0.8); }
+        }
+
+        .cert-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-organisme {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-status {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+            text-align: center;
+        }
+
+        .cert-status.obtenue {
+            background: rgba(34, 211, 238, 0.2);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(34, 211, 238, 0.5);
+        }
+
+        .cert-status.en_cours {
+            background: rgba(255, 193, 7, 0.2);
+            color: #FFC107;
+            border: 1px solid rgba(255, 193, 7, 0.5);
+        }
+
+        .cert-status.prevue {
+            background: rgba(156, 163, 175, 0.2);
+            color: #9CA3AF;
+            border: 1px solid rgba(156, 163, 175, 0.5);
+        }
+
+        .cert-progress-container {
+            margin: 1rem 0;
+        }
+
+        .cert-progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .cert-progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(34, 211, 238, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .cert-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FFC107, #FFD54F);
+            border-radius: 5px;
+            transition: width 1s ease;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+
+        .cert-date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .cert-details {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .cert-detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+        }
+
+        .cert-detail-label {
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .cert-link {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+            color: var(--primary-dark);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .cert-link:hover {
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .flip-hint {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            opacity: 0.7;
+        }
+
+        .cert-category-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(34, 211, 238, 0.2);
+            color: var(--accent-cyan);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Mouchoux.DEV</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#accueil" class="nav-link active">Accueil</a></li>
+                <li><a href="#apropos" class="nav-link">À propos</a></li>
+                <li><a href="#competences" class="nav-link">Compétences</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#projets" class="nav-link">Projets</a></li>
+                <li><a href="#veille" class="nav-link">Veille</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <div class="profile-photo">👨‍💻</div>
+            <h1 class="hero-title">ATHOUMANI Ahamda Moucharaf</h1>
+            <p class="hero-subtitle">Technicien SISR - Administrateur Systèmes &amp; Réseaux</p>
+            <p style="margin-bottom: 2rem; color: var(--text-secondary);">Étudiant en BTS SIO SISR passionné par l'infrastructure informatique et la sécurité réseau</p>
+            <div class="cta-buttons">
+                <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+                <a href="#contact" class="btn btn-secondary">Me contacter</a>
+            </div>
+        </div>
+        
+        <div class="cube-container">
+            <div class="cube">
+                <div class="cube-face front">SISR</div>
+                <div class="cube-face back">RÉSEAU</div>
+                <div class="cube-face right">SYSTÈME</div>
+                <div class="cube-face left">SÉCURITÉ</div>
+                <div class="cube-face top">ADMIN</div>
+                <div class="cube-face bottom">TECH</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- À propos Section -->
+    <section id="apropos">
+        <h2 class="section-title fade-in">À propos</h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--text-secondary);" class="fade-in">
+                Passionné par les technologies de l'information, je me spécialise dans l'administration des systèmes et réseaux. 
+                Mon parcours en BTS SIO option SISR me permet d'acquérir les compétences techniques nécessaires pour 
+                concevoir, installer et maintenir des infrastructures informatiques robustes et sécurisées.
+            </p>
+            
+            <div class="skills-grid">
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">🎯</div>
+                    <h3>Objectifs</h3>
+                    <p>Devenir un expert en infrastructure IT et contribuer à la transformation numérique des entreprises.</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">📚</div>
+                    <h3>Formation</h3>
+                    <p>BTS SIO SISR en cours, formations certifiantes Cisco CCNA et Microsoft en préparation.</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">💡</div>
+                    <h3>Passion</h3>
+                    <p>Veille technologique active, expérimentation de nouvelles solutions d'infrastructure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compétences Section -->
+    <section id="competences">
+        <h2 class="section-title fade-in">Compétences</h2>
+        
+        <div class="skills-grid">
+            <div class="skill-card fade-in">
+                <div class="skill-icon">🌐</div>
+                <div class="skill-name">Réseaux</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-fill" data-width="85"></div>
+                </div>
+                <div class="tech-badges">
+                    <span class="tech-badge">Cisco</span>
+                    <span class="tech-badge">pfSense</span>
+                    <span class="tech-badge">VLAN</span>
+                    <span class="tech-badge">Routage</span>
+                </div>
+            </div>
+            
+            <div class="skill-card fade-in">
+                <div class="skill-icon">🖥️</div>
+                <div class="skill-name">Systèmes</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-fill" data-width="80"></div>
+                </div>
+                <div class="tech-badges">
+                    <span class="tech-badge">Windows Server</span>
+                    <span class="tech-badge">Linux</span>
+                    <span class="tech-badge">Active Directory</span>
+                </div>
+            </div>
+            
+            <div class="skill-card fade-in">
+                <div class="skill-icon">☁️</div>
+                <div class="skill-name">Virtualisation</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-fill" data-width="75"></div>
+                </div>
+                <div class="tech-badges">
+                    <span class="tech-badge">VMware</span>
+                    <span class="tech-badge">Proxmox</span>
+                    <span class="tech-badge">Docker</span>
+                    <span class="tech-badge">Hyper-V</span>
+                </div>
+            </div>
+            
+            <div class="skill-card fade-in">
+                <div class="skill-icon">🔒</div>
+                <div class="skill-name">Sécurité</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-fill" data-width="70"></div>
+                </div>
+                <div class="tech-badges">
+                    <span class="tech-badge">Firewall</span>
+                    <span class="tech-badge">Monitoring</span>
+                    <span class="tech-badge">Backup</span>
+                    <span class="tech-badge">Audit</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications">
+        <h2 class="section-title fade-in">Certifications</h2>
+        
+        <div class="certifications-filters fade-in">
+            <button class="filter-btn active" data-filter="all">Toutes</button>
+            <button class="filter-btn" data-filter="obtenue">Obtenues</button>
+            <button class="filter-btn" data-filter="en_cours">En cours</button>
+            <button class="filter-btn" data-filter="prevue">Prévues</button>
+        </div>
+        
+        <div class="certifications-grid" id="certificationsGrid">
+            <!-- BTS SIO SISR -->
+            <div class="cert-card-container fade-in" data-status="obtenue" data-category="diplome">
+                <div class="cert-card">
+                    <div class="cert-card-front">
+                        <div>
+                            <div class="cert-badge">🎓</div>
+                            <h3 class="cert-name">BTS SIO SISR</h3>
+                            <p class="cert-organisme">Ministère de l'Éducation</p>
+                            <div class="cert-status obtenue">✓ Obtenue</div>
+                            <div class="cert-category-badge">Diplôme</div>
+                        </div>
+                        <div>
+                            <p class="cert-date">📅 Juin 2025</p>
+                            <p class="flip-hint">Cliquez pour voir les détails</p>
+                        </div>
+                    </div>
+                    <div class="cert-card-back">
+                        <div>
+                            <h3 class="cert-name">BTS SIO SISR</h3>
+                            <div class="cert-details">
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Organisme:</span>
+                                    <span>Ministère de l'Éducation</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Numéro:</span>
+                                    <span>BTS-2025-SISR</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Date:</span>
+                                    <span>Juin 2025</span>
+                                </div>
+                            </div>
+                            <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">Diplôme Bac+2 - Services Informatiques aux Organisations</p>
+                        </div>
+                        <a href="#" class="cert-link" target="_blank">Voir le certificat</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CompTIA A+ -->
+            <div class="cert-card-container fade-in" data-status="obtenue" data-category="systeme">
+                <div class="cert-card">
+                    <div class="cert-card-front">
+                        <div>
+                            <div class="cert-badge">💻</div>
+                            <h3 class="cert-name">CompTIA A+</h3>
+                            <p class="cert-organisme">CompTIA</p>
+                            <div class="cert-status obtenue">✓ Obtenue</div>
+                            <div class="cert-category-badge">Système</div>
+                        </div>
+                        <div>
+                            <p class="cert-date">📅 Novembre 2024</p>
+                            <p class="flip-hint">Cliquez pour voir les détails</p>
+                        </div>
+                    </div>
+                    <div class="cert-card-back">
+                        <div>
+                            <h3 class="cert-name">CompTIA A+</h3>
+                            <div class="cert-details">
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Organisme:</span>
+                                    <span>CompTIA</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Numéro:</span>
+                                    <span>A+-XXXX-YYYY</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Obtention:</span>
+                                    <span>Nov 2024</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Expiration:</span>
+                                    <span>Nov 2027</span>
+                                </div>
+                            </div>
+                            <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">Certification matériel et systèmes d'exploitation</p>
+                        </div>
+                        <a href="#" class="cert-link" target="_blank">Voir le badge</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Linux LPIC-1 -->
+            <div class="cert-card-container fade-in" data-status="obtenue" data-category="systeme">
+                <div class="cert-card">
+                    <div class="cert-card-front">
+                        <div>
+                            <div class="cert-badge">🐧</div>
+                            <h3 class="cert-name">Linux LPIC-1</h3>
+                            <p class="cert-organisme">Linux Foundation</p>
+                            <div class="cert-status obtenue">✓ Obtenue</div>
+                            <div class="cert-category-badge">Système</div>
+                        </div>
+                        <div>
+                            <p class="cert-date">📅 Septembre 2024</p>
+                            <p class="flip-hint">Cliquez pour voir les détails</p>
+                        </div>
+                    </div>
+                    <div class="cert-card-back">
+                        <div>
+                            <h3 class="cert-name">Linux LPIC-1</h3>
+                            <div class="cert-details">
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Organisme:</span>
+                                    <span>Linux Foundation</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Numéro:</span>
+                                    <span>LPI-XXXX</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Obtention:</span>
+                                    <span>Sept 2024</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Expiration:</span>
+                                    <span>Sept 2027</span>
+                                </div>
+                            </div>
+                            <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">Linux Professional Institute Certification Level 1</p>
+                        </div>
+                        <a href="#" class="cert-link" target="_blank">Voir le badge</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cisco CCNA Cybersecurity -->
+            <div class="cert-card-container fade-in" data-status="en_cours" data-category="reseau">
+                <div class="cert-card">
+                    <div class="cert-card-front">
+                        <div>
+                            <div class="cert-badge">🌐</div>
+                            <h3 class="cert-name">Cisco CCNA Cybersecurity</h3>
+                            <p class="cert-organisme">Cisco Academy</p>
+                            <div class="cert-status en_cours">⏳ En cours</div>
+                            <div class="cert-category-badge">Réseau</div>
+                            <div class="cert-progress-container">
+                                <div class="cert-progress-label">
+                                    <span>Progression</span>
+                                    <span>65%</span>
+                                </div>
+                                <div class="cert-progress-bar">
+                                    <div class="cert-progress-fill" data-progress="65"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="cert-date">🎯 Prévue: Décembre 2025</p>
+                            <p class="flip-hint">Cliquez pour voir les détails</p>
+                        </div>
+                    </div>
+                    <div class="cert-card-back">
+                        <div>
+                            <h3 class="cert-name">Cisco CCNA Cybersecurity</h3>
+                            <div class="cert-details">
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Organisme:</span>
+                                    <span>Cisco Academy</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Statut:</span>
+                                    <span>En cours (65%)</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Date prévue:</span>
+                                    <span>Déc 2025</span>
+                                </div>
+                            </div>
+                            <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">Préparation à la certification CCNA Cybersecurity</p>
+                        </div>
+                        <a href="#" class="cert-link" target="_blank">Ressources de formation</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CompTIA Security+ -->
+            <div class="cert-card-container fade-in" data-status="en_cours" data-category="securite">
+                <div class="cert-card">
+                    <div class="cert-card-front">
+                        <div>
+                            <div class="cert-badge">🔒</div>
+                            <h3 class="cert-name">CompTIA Security+</h3>
+                            <p class="cert-organisme">CompTIA</p>
+                            <div class="cert-status en_cours">⏳ En cours</div>
+                            <div class="cert-category-badge">Sécurité</div>
+                            <div class="cert-progress-container">
+                                <div class="cert-progress-label">
+                                    <span>Progression</span>
+                                    <span>45%</span>
+                                </div>
+                                <div class="cert-progress-bar">
+                                    <div class="cert-progress-fill" data-progress="45"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="cert-date">🎯 Prévue: Janvier 2026</p>
+                            <p class="flip-hint">Cliquez pour voir les détails</p>
+                        </div>
+                    </div>
+                    <div class="cert-card-back">
+                        <div>
+                            <h3 class="cert-name">CompTIA Security+</h3>
+                            <div class="cert-details">
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Organisme:</span>
+                                    <span>CompTIA</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Statut:</span>
+                                    <span>En cours (45%)</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Date prévue:</span>
+                                    <span>Jan 2026</span>
+                                </div>
+                            </div>
+                            <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">Certification sécurité informatique</p>
+                        </div>
+                        <a href="#" class="cert-link" target="_blank">Ressources de formation</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- VMware vSphere -->
+            <div class="cert-card-container fade-in" data-status="en_cours" data-category="virtualisation">
+                <div class="cert-card">
+                    <div class="cert-card-front">
+                        <div>
+                            <div class="cert-badge">☁️</div>
+                            <h3 class="cert-name">VMware vSphere Associate</h3>
+                            <p class="cert-organisme">VMware</p>
+                            <div class="cert-status en_cours">⏳ En cours</div>
+                            <div class="cert-category-badge">Virtualisation</div>
+                            <div class="cert-progress-container">
+                                <div class="cert-progress-label">
+                                    <span>Progression</span>
+                                    <span>30%</span>
+                                </div>
+                                <div class="cert-progress-bar">
+                                    <div class="cert-progress-fill" data-progress="30"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="cert-date">🎯 Prévue: Février 2026</p>
+                            <p class="flip-hint">Cliquez pour voir les détails</p>
+                        </div>
+                    </div>
+                    <div class="cert-card-back">
+                        <div>
+                            <h3 class="cert-name">VMware vSphere Associate</h3>
+                            <div class="cert-details">
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Organisme:</span>
+                                    <span>VMware</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Statut:</span>
+                                    <span>En cours (30%)</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Date prévue:</span>
+                                    <span>Fév 2026</span>
+                                </div>
+                            </div>
+                            <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">Virtualisation et gestion d'infrastructure</p>
+                        </div>
+                        <a href="#" class="cert-link" target="_blank">Ressources de formation</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cisco CCNA Enterprise -->
+            <div class="cert-card-container fade-in" data-status="prevue" data-category="reseau">
+                <div class="cert-card">
+                    <div class="cert-card-front">
+                        <div>
+                            <div class="cert-badge">🔧</div>
+                            <h3 class="cert-name">Cisco CCNA Enterprise Infrastructure Automation</h3>
+                            <p class="cert-organisme">Cisco Academy</p>
+                            <div class="cert-status prevue">📋 Prévue</div>
+                            <div class="cert-category-badge">Réseau</div>
+                        </div>
+                        <div>
+                            <p class="cert-date">🎯 Prévue: Juin 2026</p>
+                            <p class="flip-hint">Cliquez pour voir les détails</p>
+                        </div>
+                    </div>
+                    <div class="cert-card-back">
+                        <div>
+                            <h3 class="cert-name">Cisco CCNA Enterprise</h3>
+                            <div class="cert-details">
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Organisme:</span>
+                                    <span>Cisco Academy</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Statut:</span>
+                                    <span>Prévue</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Date prévue:</span>
+                                    <span>Juin 2026</span>
+                                </div>
+                            </div>
+                            <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">Automatisation infrastructure d'entreprise</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AWS Solutions Architect -->
+            <div class="cert-card-container fade-in" data-status="prevue" data-category="cloud">
+                <div class="cert-card">
+                    <div class="cert-card-front">
+                        <div>
+                            <div class="cert-badge">☁️</div>
+                            <h3 class="cert-name">AWS Certified Solutions Architect Associate</h3>
+                            <p class="cert-organisme">Amazon Web Services</p>
+                            <div class="cert-status prevue">📋 Prévue</div>
+                            <div class="cert-category-badge">Cloud</div>
+                        </div>
+                        <div>
+                            <p class="cert-date">🎯 Prévue: Avril 2026</p>
+                            <p class="flip-hint">Cliquez pour voir les détails</p>
+                        </div>
+                    </div>
+                    <div class="cert-card-back">
+                        <div>
+                            <h3 class="cert-name">AWS Solutions Architect</h3>
+                            <div class="cert-details">
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Organisme:</span>
+                                    <span>Amazon Web Services</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Statut:</span>
+                                    <span>Prévue</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Date prévue:</span>
+                                    <span>Avril 2026</span>
+                                </div>
+                            </div>
+                            <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">Architecture cloud AWS</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CEH -->
+            <div class="cert-card-container fade-in" data-status="prevue" data-category="securite">
+                <div class="cert-card">
+                    <div class="cert-card-front">
+                        <div>
+                            <div class="cert-badge">🛡️</div>
+                            <h3 class="cert-name">CEH (Certified Ethical Hacker)</h3>
+                            <p class="cert-organisme">EC-Council</p>
+                            <div class="cert-status prevue">📋 Prévue</div>
+                            <div class="cert-category-badge">Sécurité</div>
+                        </div>
+                        <div>
+                            <p class="cert-date">🎯 Prévue: Septembre 2026</p>
+                            <p class="flip-hint">Cliquez pour voir les détails</p>
+                        </div>
+                    </div>
+                    <div class="cert-card-back">
+                        <div>
+                            <h3 class="cert-name">Certified Ethical Hacker</h3>
+                            <div class="cert-details">
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Organisme:</span>
+                                    <span>EC-Council</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Statut:</span>
+                                    <span>Prévue</span>
+                                </div>
+                                <div class="cert-detail-item">
+                                    <span class="cert-detail-label">Date prévue:</span>
+                                    <span>Sept 2026</span>
+                                </div>
+                            </div>
+                            <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">Cybersécurité et test de pénétration</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projets Section -->
+    <section id="projets">
+        <h2 class="section-title fade-in">Projets</h2>
+        
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <div class="project-image">🌐</div>
+                <h3 class="project-title">Configuration Réseau VLAN</h3>
+                <p class="project-description">Mise en place d'une architecture réseau segmentée avec VLANs pour améliorer la sécurité et les performances.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">Cisco</span>
+                    <span class="tech-badge">Packet Tracer</span>
+                    <span class="tech-badge">VLAN</span>
+                    <span class="tech-badge">Routage</span>
+                </div>
+                <a href="#" class="btn btn-primary" style="margin-top: 1rem;">Voir sur GitHub</a>
+            </div>
+            
+            <div class="project-card fade-in">
+                <div class="project-image">🖥️</div>
+                <h3 class="project-title">Serveur Active Directory</h3>
+                <p class="project-description">Déploiement et configuration d'un domaine Windows Server avec gestion des utilisateurs et stratégies de groupe.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">Windows Server</span>
+                    <span class="tech-badge">Active Directory</span>
+                    <span class="tech-badge">GPO</span>
+                    <span class="tech-badge">DNS</span>
+                </div>
+                <a href="#" class="btn btn-primary" style="margin-top: 1rem;">Voir sur GitHub</a>
+            </div>
+            
+            <div class="project-card fade-in">
+                <div class="project-image">☁️</div>
+                <h3 class="project-title">Infrastructure Virtualisée</h3>
+                <p class="project-description">Architecture virtualisée avec Proxmox et déploiement de conteneurs Docker pour optimiser les ressources.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">Proxmox</span>
+                    <span class="tech-badge">Docker</span>
+                    <span class="tech-badge">Linux</span>
+                    <span class="tech-badge">Backup</span>
+                </div>
+                <a href="#" class="btn btn-primary" style="margin-top: 1rem;">Voir sur GitHub</a>
+            </div>
+            
+            <div class="project-card fade-in">
+                <div class="project-image">📊</div>
+                <h3 class="project-title">Monitoring Zabbix</h3>
+                <p class="project-description">Mise en place d'une solution de supervision réseau complète avec alertes automatisées et tableaux de bord.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">Zabbix</span>
+                    <span class="tech-badge">SNMP</span>
+                    <span class="tech-badge">MySQL</span>
+                    <span class="tech-badge">PHP</span>
+                </div>
+                <a href="#" class="btn btn-primary" style="margin-top: 1rem;">Voir sur GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Veille Section -->
+    <section id="veille">
+        <h2 class="section-title fade-in">Veille Technologique</h2>
+        
+        <div class="veille-content">
+            <div class="articles-list">
+                <div class="article-card fade-in">
+                    <div class="article-date">15 octobre 2025 - IT News</div>
+                    <h3 class="article-title">Évolution du WiFi 7</h3>
+                    <p class="article-resume">Les nouvelles fonctionnalités du standard WiFi 7 et leur impact sur les infrastructures réseau d'entreprise.</p>
+                </div>
+                
+                <div class="article-card fade-in">
+                    <div class="article-date">10 octobre 2025 - Cyber Security</div>
+                    <h3 class="article-title">Sécurité Zero Trust</h3>
+                    <p class="article-resume">Principes et implémentation du modèle Zero Trust pour renforcer la sécurité des systèmes d'information.</p>
+                </div>
+                
+                <div class="article-card fade-in">
+                    <div class="article-date">5 octobre 2025 - DevOps Weekly</div>
+                    <h3 class="article-title">Container Security</h3>
+                    <p class="article-resume">Bonnes pratiques de sécurité pour Docker et Kubernetes dans les environnements de production.</p>
+                </div>
+            </div>
+            
+            <div class="tools-sidebar fade-in">
+                <h3 style="color: var(--accent-cyan); margin-bottom: 1.5rem;">Outils de Veille</h3>
+                
+                <div class="tool-item">
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Google Alerts</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Alertes automatisées sur les mots-clés IT stratégiques</p>
+                </div>
+                
+                <div class="tool-item">
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Reddit IT</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Communautés spécialisées en infrastructure et sécurité</p>
+                </div>
+                
+                <div class="tool-item">
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">LinkedIn</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Articles et analyses d'experts du secteur IT</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title fade-in">Contact</h2>
+        
+        <div class="contact-container fade-in">
+            <form id="contactForm">
+                <div class="form-group">
+                    <label class="form-label" for="name">Nom</label>
+                    <input type="text" id="name" name="name" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="subject">Sujet</label>
+                    <input type="text" id="subject" name="subject" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="message">Message</label>
+                    <textarea id="message" name="message" class="form-input form-textarea" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full-width">Envoyer le message</button>
+            </form>
+            
+            <div class="social-links">
+                <a href="moucharafdupapas@gmail.com" class="social-link" title="Email">📧</a>
+                <a href="https://linkedin.com/in/prince-sisr" target="_blank" class="social-link" title="LinkedIn">💼</a>
+                <a href="https://github.com/prince-sisr" target="_blank" class="social-link" title="GitHub">🐙</a>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem; color: var(--text-secondary);">
+                <p>📞 07 44 54 57 70</p>
+                <p>📍 France</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <script>
+        // Particles generation
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = particle.style.height = Math.random() * 4 + 2 + 'px';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Smooth scrolling for navigation
+        function initSmoothScroll() {
+            document.querySelectorAll('.nav-link, .btn').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+        }
+
+        // Active navigation highlighting
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Skill progress bars animation
+        function animateSkillBars() {
+            const progressBars = document.querySelectorAll('.skill-progress-fill');
+            
+            progressBars.forEach(bar => {
+                const targetWidth = bar.getAttribute('data-width') + '%';
+                const barRect = bar.getBoundingClientRect();
+                
+                if (barRect.top < window.innerHeight && barRect.bottom > 0) {
+                    bar.style.width = targetWidth;
+                }
+            });
+        }
+
+        // Back to top button
+        function initBackToTop() {
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // Contact form handling
+        function initContactForm() {
+            const contactForm = document.getElementById('contactForm');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulate form submission
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                
+                submitBtn.textContent = 'Envoi en cours...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    submitBtn.textContent = 'Message envoyé !';
+                    submitBtn.style.background = 'var(--accent-cyan)';
+                    
+                    setTimeout(() => {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                        submitBtn.style.background = '';
+                        contactForm.reset();
+                    }, 2000);
+                }, 1000);
+            });
+        }
+
+        // Cube interaction
+        function initCubeInteraction() {
+            const cube = document.querySelector('.cube');
+            if (cube) {
+                cube.addEventListener('mouseenter', () => {
+                    cube.style.animationPlayState = 'paused';
+                });
+                
+                cube.addEventListener('mouseleave', () => {
+                    cube.style.animationPlayState = 'running';
+                });
+            }
+        }
+
+        // Scroll event handler
+        function handleScroll() {
+            updateActiveNav();
+            animateOnScroll();
+            animateSkillBars();
+            
+            // Show/hide back to top button
+            const backToTopBtn = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        }
+
+        // Certification card flip functionality
+        function initCertificationCards() {
+            const certCards = document.querySelectorAll('.cert-card');
+            
+            certCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('flipped');
+                });
+            });
+            
+            // Animate progress bars for in-progress certifications
+            const progressFills = document.querySelectorAll('.cert-progress-fill');
+            progressFills.forEach(fill => {
+                const progress = fill.getAttribute('data-progress');
+                setTimeout(() => {
+                    fill.style.width = progress + '%';
+                }, 300);
+            });
+        }
+
+        // Certification filtering functionality
+        function initCertificationFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const certContainers = document.querySelectorAll('.cert-card-container');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active button
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    certContainers.forEach(container => {
+                        const status = container.getAttribute('data-status');
+                        
+                        if (filterValue === 'all' || filterValue === status) {
+                            container.style.display = 'block';
+                            // Trigger fade-in animation
+                            setTimeout(() => {
+                                container.classList.add('visible');
+                            }, 10);
+                        } else {
+                            container.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            initSmoothScroll();
+            initBackToTop();
+            initContactForm();
+            initCubeInteraction();
+            initCertificationCards();
+            initCertificationFilters();
+            
+            // Initial scroll check
+            handleScroll();
+            
+            // Scroll event listener
+            window.addEventListener('scroll', handleScroll);
+            
+            // Initial animation trigger
+            setTimeout(animateOnScroll, 100);
+        });
+
+        // Resize handler for responsive behavior
+        window.addEventListener('resize', () => {
+            // Reduce animations on small screens
+            if (window.innerWidth <= 768) {
+                document.querySelector('.cube').style.animationDuration = '20s';
+            } else {
+                document.querySelector('.cube').style.animationDuration = '10s';
+            }
+        });
+    </script>
+</body>
+</html>
