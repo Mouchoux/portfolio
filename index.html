@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prince - Portfolio SISR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0B1220;
+            --secondary-dark: #0F172A;
+            --accent-cyan: #22D3EE;
+            --accent-blue: #21DAFF;
+            --text-primary: #E6EEF5;
+            --text-secondary: #93A4B6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(11, 18, 32, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 20px var(--accent-cyan);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+            background: rgba(34, 211, 238, 0.1);
+        }
+
+        /* Particles Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            33% { transform: translateY(-20px) translateX(10px); }
+            66% { transform: translateY(10px) translateX(-10px); }
+        }
+
+        /* 3D Cube */
+        .cube-container {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            perspective: 1000px;
+        }
+
+        .cube {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 10s infinite linear;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid var(--accent-cyan);
+            background: rgba(34, 211, 238, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
+        }
+
+        .cube-face.front { transform: rotateY(0deg) translateZ(100px); }
+        .cube-face.back { transform: rotateY(180deg) translateZ(100px); }
+        .cube-face.right { transform: rotateY(90deg) translateZ(100px); }
+        .cube-face.left { transform: rotateY(-90deg) translateZ(100px); }
+        .cube-face.top { transform: rotateX(90deg) translateZ(100px); }
+        .cube-face.bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+        @keyframes rotateCube {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 6rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 30px var(--accent-cyan);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .profile-photo {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 50px rgba(34, 211, 238, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 50px rgba(34, 211, 238, 0.5); }
+            50% { box-shadow: 0 0 80px rgba(34, 211, 238, 0.8); }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+            color: var(--primary-dark);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-cyan);
+            border: 2px solid var(--accent-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-cyan);
+            color: var(--primary-dark);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.5);
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 30px rgba(34, 211, 238, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .skill-progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(34, 211, 238, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .skill-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            border-radius: 4px;
+            transition: width 2s ease;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-badge {
+            background: rgba(34, 211, 238, 0.2);
+            color: var(--accent-cyan);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 15px 40px rgba(34, 211, 238, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary-dark), var(--secondary-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Veille Section */
+        .veille-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .articles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .article-card {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .article-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 25px rgba(34, 211, 238, 0.2);
+        }
+
+        .article-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-title {
+            color: var(--accent-cyan);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .tools-sidebar {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        .tool-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(34, 211, 238, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-cyan);
+        }
+
+        /* Contact Form */
+        .contact-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(11, 18, 32, 0.8);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            color: var(--accent-cyan);
+            font-size: 2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--accent-blue);
+            text-shadow: 0 0 20px var(--accent-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+            border: none;
+            border-radius: 50%;
+            color: var(--primary-dark);
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.7);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(11, 18, 32, 0.95);
+                padding: 1rem 0;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .nav-menu.active {
+                transform: translateX(0);
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 4rem 1rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .cube-container {
+                position: static;
+                transform: none;
+                margin: 2rem 0;
+            }
+
+            .cube {
+                width: 150px;
+                height: 150px;
+            }
+
+            .cube-face {
+                width: 150px;
+                height: 150px;
+            }
+
+            .profile-photo {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto 2rem;
+            }
+
+            .veille-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Certifications Section */
+        .certifications-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            border-radius: 25px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+            color: var(--primary-dark);
+            border-color: transparent;
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            perspective: 1000px;
+        }
+
+        .cert-card-container {
+            height: 380px;
+            perspective: 1000px;
+        }
+
+        .cert-card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+            cursor: pointer;
+        }
+
+        .cert-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .cert-card-front,
+        .cert-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            padding: 2rem;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cert-card-front {
+            transform: rotateY(0deg);
+        }
+
+        .cert-card-back {
+            transform: rotateY(180deg);
+            background: rgba(11, 18, 32, 0.9);
+            border-color: var(--accent-cyan);
+        }
+
+        .cert-badge {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.5);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 30px rgba(34, 211, 238, 0.5); }
+            50% { box-shadow: 0 0 50px rgba(34, 211, 238, 0.8); }
+        }
+
+        .cert-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-organisme {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-status {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+            text-align: center;
+        }
+
+        .cert-status.obtenue {
+            background: rgba(34, 211, 238, 0.2);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(34, 211, 238, 0.5);
+        }
+
+        .cert-status.en_cours {
+            background: rgba(255, 193, 7, 0.2);
+            color: #FFC107;
+            border: 1px solid rgba(255, 193, 7, 0.5);
+        }
+
+        .cert-status.prevue {
+            background: rgba(156, 163, 175, 0.2);
+            color: #9CA3AF;
+            border: 1px solid rgba(156, 163, 175, 0.5);
+        }
+
+        .cert-progress-container {
+            margin: 1rem 0;
+        }
+
+        .cert-progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .cert-progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(34, 211, 238, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .cert-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FFC107, #FFD54F);
+            border-radius: 5px;
+            transition: width 1s ease;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+
+        .cert-date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .cert-details {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .cert-detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+        }
+
+        .cert-detail-label {
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .cert-link {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue));
+            color: var(--primary-dark);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .cert-link:hover {
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .flip-hint {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            opacity: 0.7;
+        }
+
+        .cert-category-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(34, 211, 238, 0.2);
+            color: var(--accent-cyan);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+
+
+        /* Section BTS SIO isolée */
+.section-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--accent-cyan, #22D3EE);
+    text-shadow: 0 0 30px rgba(34, 211, 238, 0.5);
+}
+
+.bts-intro {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.bts-intro p {
+    color: var(--text-secondary, #93A4B6);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.bts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.bts-card {
+    background: rgba(15, 23, 42, 0.8);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(34, 211, 238, 0.3);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.bts-card:hover {
+    border-color: var(--accent-cyan, #22D3EE);
+    box-shadow: 0 15px 40px rgba(34, 211, 238, 0.25);
+    transform: translateY(-6px);
+}
+
+.bts-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 18px;
+    display: flex;
+    align-items
+
+
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Moucharaf</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#accueil" class="nav-link active">Accueil</a></li>
+                <li><a href="#apropos" class="nav-link">À propos</a></li>
+                <li><a href="#competences" class="nav-link">Compétences</a></li>
+              
+                <li><a href="#projets" class="nav-link">Projets</a></li>
+                <li><a href="#veille" class="nav-link">Veille</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <div class="profile-photo">👨‍💻</div>
+            <h1 class="hero-title">ATHOUMANI Ahamda Moucharaf</h1>
+            <p class="hero-subtitle">Technicien SISR - Administrateur Systèmes &amp; Réseaux</p>
+            <p style="margin-bottom: 2rem; color: var(--text-secondary);">Étudiant en BTS SIO SISR passionné par l'infrastructure informatique et la sécurité réseau</p>
+            <div class="cta-buttons">
+                <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+                <a href="#contact" class="btn btn-secondary">Me contacter</a>
+                <a href="PDF/Tableau_de_synthese_Epreuve_E5-2026-1.pdf" class="btn btn-secondary">TBl synthese</a>
+            </div>
+        </div>
+        
+        <div class="cube-container">
+            <div class="cube">
+                <div class="cube-face front">SISR</div>
+                <div class="cube-face back">RÉSEAU</div>
+                <div class="cube-face right">SYSTÈME</div>
+                <div class="cube-face left">SÉCURITÉ</div>
+                <div class="cube-face top">ADMIN</div>
+                <div class="cube-face bottom">TECH</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- À propos Section -->
+    <section id="apropos">
+        <h2 class="section-title fade-in">À propos</h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--text-secondary);" class="fade-in">
+                Passionné par les technologies de l'information, je me spécialise dans l'administration des systèmes et réseaux. 
+                Mon parcours en BTS SIO option SISR me permet d'acquérir les compétences techniques nécessaires pour 
+                concevoir, installer et maintenir des infrastructures informatiques robustes et sécurisées.
+            </p>
+            
+            <div class="skills-grid">
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">🎯</div>
+                    <h3>Objectifs</h3>
+                    <p>Devenir un expert en infrastructure IT et contribuer à la transformation numérique des entreprises.</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">📚</div>
+                    <h3>Formation</h3>
+                    <p>BTS SIO SISR en cours, formations certifiantes Cisco CCNA et Microsoft en préparation.</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">💡</div>
+                    <h3>Passion</h3>
+                    <p>Veille technologique active, expérimentation de nouvelles solutions d'infrastructure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section BTS SIO (isoler et autonome) -->
+<section id="bts-sio">
+    <h2 class="section-title fade-in">BTS SIO</h2>
+
+    <div class="bts-intro fade-in">
+        <p>
+            Le BTS Services Informatiques aux Organisations est une formation orientée vers les métiers de l'informatique.
+            Il se divise en deux spécialités complémentaires : <strong>SLAM</strong>, centrée sur le développement d'applications,
+            et <strong>SISR</strong>, tournée vers l'administration des systèmes, des réseaux et de la cybersécurité.
+        </p>
+    </div>
+
+    <div class="bts-grid">
+        <article class="bts-card fade-in" aria-labelledby="slam-title">
+            <div class="bts-icon" aria-hidden="true">💻</div>
+            <h3 id="slam-title">SLAM</h3>
+            <p class="bts-subtitle">Solutions Logicielles et Applications Métiers</p>
+            <p>
+                Cette spécialité prépare à la conception, au développement et à la maintenance d'applications web, mobiles ou logicielles.
+                Elle convient aux profils attirés par la programmation, les bases de données et la création de solutions numériques.
+            </p>
+            <div class="bts-pill-list">
+                <span class="bts-pill">HTML / CSS / JavaScript</span>
+                <span class="bts-pill">PHP / Java</span>
+                <span class="bts-pill">SQL / Bases de données</span>
+            </div>
+            <ul class="bts-list">
+                <li>Développer des applications répondant aux besoins des entreprises.</li>
+                <li>Concevoir des interfaces, des API et des bases de données.</li>
+                <li>Assurer les tests, les corrections et l'évolution des logiciels.</li>
+                <li>Travailler en méthode projet avec documentation et versionning.</li>
+            </ul>
+        </article>
+
+        <article class="bts-card fade-in" aria-labelledby="sisr-title">
+            <div class="bts-icon" aria-hidden="true">🌐</div>
+            <h3 id="sisr-title">SISR</h3>
+            <p class="bts-subtitle">Solutions d'Infrastructure, Systèmes et Réseaux</p>
+            <p>
+                Cette spécialité forme aux infrastructures informatiques, à l'administration système et à la sécurisation des réseaux.
+                Elle correspond aux étudiants qui aiment configurer, superviser, maintenir et protéger des environnements techniques.
+            </p>
+            <div class="bts-pill-list">
+                <span class="bts-pill">Linux / Windows Server</span>
+                <span class="bts-pill">Réseaux / Cisco</span>
+                <span class="bts-pill">Virtualisation / Sécurité</span>
+            </div>
+            <ul class="bts-list">
+                <li>Installer et administrer des serveurs, postes et équipements réseau.</li>
+                <li>Assurer la disponibilité, la sécurité et la supervision des services.</li>
+                <li>Mettre en place des solutions de sauvegarde, d'accès et de cybersécurité.</li>
+                <li>Intervenir sur des projets d'infrastructure adaptés aux besoins des organisations.</li>
+            </ul>
+        </article>
+    </div>
+</section>
+
+
+
+<!-- À propos Section -->
+    <section id="apropos">
+        <h2 class="section-title fade-in">Stage</h2>
+        
+            <div class="skills-grid">
+                <div class="skill-card fade-in">
+                    
+                    <h3>1ère année</h3>
+                    <p>Stage de 1ère année consacré au développement d’un site e-commerce et à la mise en place de ses principales fonctionnalités.</p>   
+                    <a href="https://www.figma.com/design/w9svrfT65nPeacpxJzZ1tO/Style-et-int%C3%A9rieur?node-id=0-1&m=dev&t=jab6zu1TYTRTSTPn-1" class="btn btn-primary" style="margin-top: 1rem;">Voir plus</a>               
+                </div>
+                <div class="skill-card fade-in">
+                    
+                    <h3>2ème année</h3>
+                    <p>Stage de 2ème année réalisé à l’école, avec pour mission principale la mise en place et la configuration de Wazuh pour la supervision de la sécurité informatique..</p>
+                
+                <a href="pdf/10.pdf" class="btn btn-primary" style="margin-top: 1rem;">Voir plus</a>
+            
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Compétences Section -->
+    <section id="competences">
+        <h2 class="section-title fade-in">Compétences</h2>
+        
+        <div class="skills-grid">
+            <div class="skill-card fade-in">
+                <div class="skill-icon">🌐</div>
+                <div class="skill-name">Réseaux</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-fill" data-width="85"></div>
+                </div>
+                <div class="tech-badges">
+                    <span class="tech-badge">Cisco</span>
+                    <span class="tech-badge">pfSense</span>
+                    <span class="tech-badge">VLAN</span>
+                    <span class="tech-badge">Routage</span>
+                </div>
+            </div>
+            
+            <div class="skill-card fade-in">
+                <div class="skill-icon">🖥️</div>
+                <div class="skill-name">Systèmes</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-fill" data-width="80"></div>
+                </div>
+                <div class="tech-badges">
+                    <span class="tech-badge">Windows Server</span>
+                    <span class="tech-badge">Linux</span>
+                    <span class="tech-badge">Active Directory</span>
+                </div>
+            </div>
+            
+           
+            <div class="skill-card fade-in">
+                <div class="skill-icon">🔒</div>
+                <div class="skill-name">Sécurité</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-fill" data-width="70"></div>
+                </div>
+                <div class="tech-badges">
+                    <span class="tech-badge">Firewall</span>
+                    <span class="tech-badge">Monitoring</span>
+                    <span class="tech-badge">Backup</span>
+                    <span class="tech-badge">Audit</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+   
+    <!-- Projets Section -->
+    <section id="projets">
+        <h2 class="section-title fade-in">Projets</h2>
+        
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <div class="project-image">🌐</div>
+                <h3 class="project-title">Infrastructure Réseau</h3>
+                <p class="project-description">Restructuration du réseau de StadiumCompany avec adressage IP, VLAN, commutation et routage inter-sites.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">Cisco</span>
+                    <span class="tech-badge">adressage</span>
+                    <span class="tech-badge">VLAN</span>
+                    <span class="tech-badge">Routage</span>
+                    <span class="tech-badge">commutation</span>
+                </div>
+                <a href="PDF/1.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top: 1rem;">En savoir plus</a>
+            </div>
+            
+            <div class="project-card fade-in">
+                <div class="project-image">🖥️</div>
+                <h3 class="project-title">Serveur Active Directory</h3>
+                <p class="project-description">Déploiement et configuration d'un domaine Windows Server avec gestion des utilisateurs et stratégies de groupe.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">Windows Server</span>
+                    <span class="tech-badge">Active Directory</span>
+                    <span class="tech-badge">GPO</span>
+                    <span class="tech-badge">DNS</span>
+                </div>
+                <a href="PDF/2.pdf" class="btn btn-primary" style="margin-top: 1rem;">Voir plus</a>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-image">🌐</div>
+                <h3 class="project-title">Administration Sécurisée</h3>
+                <p class="project-description">Mise en place d’une administration à distance sécurisée et sécurisation des interconnexions avec VPN IPsec.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">SSH</span>
+                    <span class="tech-badge">VPN</span>
+                    <span class="tech-badge">Routers</span>
+                    
+                </div>
+                <a href="PDF/3.pdf" class="btn btn-primary" style="margin-top: 1rem;">Voir plus</a>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-image">🖥️</div>
+                <h3 class="project-title">Redondance Réseau</h3>
+                <p class="project-description">Configuration de la haute disponibilité et de la continuité de service avec HSRP, STP, GLBP et VRRP</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">HSRP</span>
+                    <span class="tech-badge">STP</span>
+                    <span class="tech-badge">VRRP</span>
+                    <span class="tech-badge">GLBP</span>
+                </div>
+                <a href="PDF/4.pdf" class="btn btn-primary" style="margin-top: 1rem;">Voir sur GitHub</a>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-image">🖥️</div>
+                <h3 class="project-title">Sécurité pfSense</h3>
+                <p class="project-description">Sécurisation de l’accès Internet et mise en place d’une DMZ avec pfSense et segmentation réseaup>
+                <div class="tech-badges">
+                    <span class="tech-badge">pfSense</span>
+                    <span class="tech-badge">DMZ</span>
+                    <span class="tech-badge">Firewall</span>
+                    <span class="tech-badge">NAT</span>
+                </div>
+                <a href="PDF/5.pdf" class="btn btn-primary" style="margin-top: 1rem;">Voir plus</a>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-image">🖥️</div>
+                <h3 class="project-title">Wi-Fi Entreprise</h3>
+                <p class="project-description">Mise en place du Wi‑Fi pour les employés et les visiteurs avec authentification RADIUS et WPA2 Enterprise.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">Wi-fi</span>
+                    <span class="tech-badge">WPA2</span>
+                    <span class="tech-badge">Cisco AP</span>
+                    
+                </div>
+                <a href="PDF/6.pdf" class="btn btn-primary" style="margin-top: 1rem;">Voir plus</a>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-image">🖥️</div>
+                <h3 class="project-title">Helpdesk et Parc</h3>
+                <p class="project-description">Déploiement d’OCS Inventory NG et GLPI pour l’inventaire, le helpdesk et l’authentification.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">GLPI</span>
+                    <span class="tech-badge">OCS</span>
+                    <span class="tech-badge">Helpdesk</span>
+                    
+                </div>
+                <a href="PDF/7.pdf" class="btn btn-primary" style="margin-top: 1rem;">Voir plus</a>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-image">🖥️</div>
+                <h3 class="project-title">Supervision Nagios</h3>
+                <p class="project-description">Mise en place d’un système de supervision open source avec Nagios Core pour les serveurs Windows et Linux.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">Nagios</span>
+                    <span class="tech-badge">Monitoring</span>
+                    <span class="tech-badge">NRPE</span>
+                    <span class="tech-badge">Supervision</span>
+                </div>
+                <a href="PDF/8.pdf" class="btn btn-primary" style="margin-top: 1rem;">Voir plus</a>
+            </div>
+            
+            <div class="project-card fade-in">
+                <div class="project-image">☁️</div>
+                <h3 class="project-title">Messagerie Zimbra</h3>
+                <p class="project-description">Installation d’une solution de messagerie collaborative avec Zimbra, DNS MX, webmail et intégration Active Directory.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">Zimbra</span>
+                    <span class="tech-badge">mail</span>
+                    <span class="tech-badge">webmail</span>
+                   
+                </div>
+                <a href="PDF/9.pdf" class="btn btn-primary" style="margin-top: 1rem;">Voir sur plus</a>
+            </div>
+            
+            <div class="project-card fade-in">
+                <div class="project-image">📊</div>
+                <h3 class="project-title">SIEM Wazuh</h3>
+                <p class="project-description">Déploiement d’une plateforme SIEM avec Wazuh pour la détection d’incidents.</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">SIEM</span>
+                    <span class="tech-badge">LOGS</span>
+                    <span class="tech-badge">securite</span>
+                    
+                </div>
+                <a href="pdf/10.pdf" class="btn btn-primary" style="margin-top: 1rem;">Voir plus</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Veille Section -->
+    <section id="veille">
+        <h2 class="section-title fade-in">Veille Technologique</h2>
+
+        <h2 class="section-title fade-in">Évolution et performances du Wi‑Fi 7 dans les infrastructures réseau modernes</h2>
+        
+        <div class="veille-content">
+            <div class="articles-list">
+                <div class="article-card fade-in">
+                    <div class="article-date">15 octobre 2025 - mathorks</div>
+                    <h3 class="article-title">Évolution du WiFi 7</h3>
+                    <p class="article-resume">Évolution et performances du Wi‑Fi 7 dans les infrastructures réseau modernes.</p>
+                </div>
+                
+                
+
+                 <div class="article-card fade-in">
+                    <div class="article-date">10 octobre 2025 - </div>
+                    <h3 class="article-title">Débits et bande passante</h3>
+                    <p class="article-resume"> canaux 320 MHz, augmentation du débit, capacité du Wi‑Fi 7.
+
+Idée à dire : le Wi‑Fi 7 augmente fortement les performances grâce à une largeur de canal plus grande et une meilleure exploitation du spectre.</p>
+                </div>
+
+                 <div class="article-card fade-in">
+                    <div class="article-date">2 Novembre 2025 - Cyber Security</div>
+                    <h3 class="article-title"> Latence et réactivité</h3>
+                    <p class="article-resume"> faible latence, stabilité de connexion, usage temps réel.
+
+Idée à dire : le Wi‑Fi 7 améliore la fluidité des usages comme la visioconférence, le streaming et les applications interactives.</p>
+                </div>
+
+                 <div class="article-card fade-in">
+                    <div class="article-date">10 octobre 2025 </div>
+                    <h3 class="article-title">Fonctionnement multi-liens MLO</h3>
+                    <p class="article-resume">Multi-Link Operation, utilisation simultanée de plusieurs bandes, fiabilité.
+
+Idée à dire : le MLO permet d’utiliser plusieurs bandes en même temps pour améliorer le débit, la stabilité et réduire la latence.</p>
+                </div>
+
+                 <div class="article-card fade-in">
+                    <div class="article-date">10 octobre 2025 - Cyber Security</div>
+                    <h3 class="article-title">Gestion des bandes 2,4 / 5 / 6 GHzt</h3>
+                    <p class="article-resume">bandes de fréquences Wi‑Fi 7, 6 GHz, compatibilité réseau.
+
+Idée à dire : le Wi‑Fi 7 fonctionne sur les trois grandes bandes, ce qui améliore la répartition des appareils et la qualité de connexion.</p>
+                </div>
+                
+                <div class="article-card fade-in">
+                    <div class="article-date">5 octobre 2025 - DevOps Weekly</div>
+                    <h3 class="article-title">Performances en environnement dense</h3>
+                    <p class="article-resume"> réseau d’entreprise, nombreux appareils, haute densité.
+
+Idée à dire : le Wi‑Fi 7 est intéressant pour les écoles, entreprises et lieux publics avec beaucoup d’utilisateurs connectés en même temps.</p>
+                </div>
+
+                <div class="article-card fade-in">
+                    <div class="article-date">5 octobre 2025 - DevOps Weekly</div>
+                    <h3 class="article-title"> Intérêt pour l’entreprise</h3>
+                    <p class="article-resume"> Wi‑Fi 7 entreprise, sécurité, mobilité, productivité.
+
+Idée à dire : en entreprise, le Wi‑Fi 7 permet d’avoir une meilleure productivité, une meilleure mobilité et une expérience plus stable.</p>
+                </div>
+
+            </div>
+            
+            <div class="tools-sidebar fade-in">
+                <h3 style="color: var(--accent-cyan); margin-bottom: 1.5rem;">Outils de Veille</h3>
+                
+                <div class="tool-item">
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">La Fibre Optique
+</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">caractéristiques, débits et avantages du Wi‑Fi 7.
+
+</p>
+                </div>
+
+                <div class="tool-item">
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">HPE France
+ </h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;"> présentation des fonctions principales du Wi‑Fi 7, comme le 320 MHz, le MLO et le 4K-QAM.
+
+</p>
+                </div>
+
+                <div class="tool-item">
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Netgear
+ </h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;"> explication simple du Wi‑Fi 7 et de ses bandes de fréquences.</p>
+                </div>
+
+                <div class="tool-item">
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Eero Support
+ </h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;"> explication du fonctionnement multi-liens MLO
+ </p>
+                </div>
+                
+                <div class="tool-item">
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Reddit IT</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Communautés spécialisées en infrastructure et sécurité</p>
+                </div>
+                
+                <div class="tool-item">
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">LinkedIn</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Articles et analyses d'experts du secteur IT</p>
+                </div>
+
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title fade-in">Contact</h2>
+        
+        <div class="contact-container fade-in">
+            <form id="contactForm">
+                <div class="form-group">
+                    <label class="form-label" for="name">Nom</label>
+                    <input type="text" id="name" name="name" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="subject">Sujet</label>
+                    <input type="text" id="subject" name="subject" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="message">Message</label>
+                    <textarea id="message" name="message" class="form-input form-textarea" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full-width">Envoyer le message</button>
+            </form>
+            
+            <div class="social-links">
+                <a href="moucharafdupapas@gmail.com" class="social-link" title="Email">📧</a>
+                <a href="https://linkedin.com/in/prince-sisr" target="_blank" class="social-link" title="LinkedIn">💼</a>
+                <a href="https://github.com/prince-sisr" target="_blank" class="social-link" title="GitHub">🐙</a>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem; color: var(--text-secondary);">
+                <p>📞 07 44 54 57 70</p>
+                <p>📍 France</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <script>
+        // Particles generation
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = particle.style.height = Math.random() * 4 + 2 + 'px';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Smooth scrolling for navigation
+        function initSmoothScroll() {
+            document.querySelectorAll('.nav-link, .btn').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+        }
+
+        // Active navigation highlighting
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Skill progress bars animation
+        function animateSkillBars() {
+            const progressBars = document.querySelectorAll('.skill-progress-fill');
+            
+            progressBars.forEach(bar => {
+                const targetWidth = bar.getAttribute('data-width') + '%';
+                const barRect = bar.getBoundingClientRect();
+                
+                if (barRect.top < window.innerHeight && barRect.bottom > 0) {
+                    bar.style.width = targetWidth;
+                }
+            });
+        }
+
+        // Back to top button
+        function initBackToTop() {
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // Contact form handling
+        function initContactForm() {
+            const contactForm = document.getElementById('contactForm');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulate form submission
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                
+                submitBtn.textContent = 'Envoi en cours...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    submitBtn.textContent = 'Message envoyé !';
+                    submitBtn.style.background = 'var(--accent-cyan)';
+                    
+                    setTimeout(() => {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                        submitBtn.style.background = '';
+                        contactForm.reset();
+                    }, 2000);
+                }, 1000);
+            });
+        }
+
+        // Cube interaction
+        function initCubeInteraction() {
+            const cube = document.querySelector('.cube');
+            if (cube) {
+                cube.addEventListener('mouseenter', () => {
+                    cube.style.animationPlayState = 'paused';
+                });
+                
+                cube.addEventListener('mouseleave', () => {
+                    cube.style.animationPlayState = 'running';
+                });
+            }
+        }
+
+        // Scroll event handler
+        function handleScroll() {
+            updateActiveNav();
+            animateOnScroll();
+            animateSkillBars();
+            
+            // Show/hide back to top button
+            const backToTopBtn = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        }
+
+        // Certification card flip functionality
+        function initCertificationCards() {
+            const certCards = document.querySelectorAll('.cert-card');
+            
+            certCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('flipped');
+                });
+            });
+            
+            // Animate progress bars for in-progress certifications
+            const progressFills = document.querySelectorAll('.cert-progress-fill');
+            progressFills.forEach(fill => {
+                const progress = fill.getAttribute('data-progress');
+                setTimeout(() => {
+                    fill.style.width = progress + '%';
+                }, 300);
+            });
+        }
+
+        // Certification filtering functionality
+        function initCertificationFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const certContainers = document.querySelectorAll('.cert-card-container');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active button
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    certContainers.forEach(container => {
+                        const status = container.getAttribute('data-status');
+                        
+                        if (filterValue === 'all' || filterValue === status) {
+                            container.style.display = 'block';
+                            // Trigger fade-in animation
+                            setTimeout(() => {
+                                container.classList.add('visible');
+                            }, 10);
+                        } else {
+                            container.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            initSmoothScroll();
+            initBackToTop();
+            initContactForm();
+            initCubeInteraction();
+            initCertificationCards();
+            initCertificationFilters();
+            
+            // Initial scroll check
+            handleScroll();
+            
+            // Scroll event listener
+            window.addEventListener('scroll', handleScroll);
+            
+            // Initial animation trigger
+            setTimeout(animateOnScroll, 100);
+        });
+
+        // Resize handler for responsive behavior
+        window.addEventListener('resize', () => {
+            // Reduce animations on small screens
+            if (window.innerWidth <= 768) {
+                document.querySelector('.cube').style.animationDuration = '20s';
+            } else {
+                document.querySelector('.cube').style.animationDuration = '10s';
+            }
+        });
+    </script>
+</body>
+</html>
